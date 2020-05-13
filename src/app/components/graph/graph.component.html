@@ -1,0 +1,33 @@
+<div class="chart-wrapper">
+  <canvas
+    baseChart
+    [datasets]="lineChartData"
+    [labels]="lineChartLabels"
+    [options]="lineChartOptions"
+    [colors]="lineChartColors"
+    [legend]="lineChartLegend"
+    [chartType]="lineChartType"
+    [plugins]="lineChartPlugins"
+  >
+  </canvas>
+</div>
+
+<div class="formType">
+  <mat-form-field>
+    <mat-label>Tipo de grafica</mat-label>
+    <mat-select [(value)]="selected">
+      <mat-option value="Sexo">Por sexos</mat-option>
+      <mat-option value="Dias">Dias</mat-option>
+      <mat-option value="Ciudades">Ciudades</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <p>Tipo de grafica actual: {{ selected }}</p>
+
+  
+    <button mat-button color="primary" (click)="CambiarGraph(selected)">
+      Cambiar
+    </button>
+
+  
+</div>

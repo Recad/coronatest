@@ -1,1 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
+
+.chart-wrapper {
+
+        display: block;
+        width: 50%;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+
+}
+.formType{
+        display: block;
+        width: 50%;
+        height: auto;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+
+}
+
+
+@media (max-width: 700px) {
+    .chart-wrapper {
+        width: 100%;
+        height: auto;
+    }
+    .formType{
+      
+      width: 100%;
+      height: auto;
+      
+
+}
+
+  }
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
