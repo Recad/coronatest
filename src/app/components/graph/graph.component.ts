@@ -14,6 +14,7 @@ export class GraphComponent implements OnInit {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective;
   datatemp = [];
   flagstemp = [];
+  timeInterlSeconds = 60;
   constructor(
     private WeatherService: WeatherService,
     private datePipe: DatePipe
@@ -45,16 +46,13 @@ export class GraphComponent implements OnInit {
           }
         );
         break;
-      case 'Dias':
-
-        this.WeatherService.getCasosDias().subscribe(
+      case 'Ciudades':
+        this.WeatherService.getCasosCiudades().subscribe(
           (data) => {
             console.log(data);
             data.forEach((element) => {
               this.datatemp.push(element['casos']);
-              this.flagstemp.push(
-                this.datePipe.transform(element['fecha'], 'yyyy-MM-dd')
-              );
+              this.flagstemp.push(element['ciudad']);
             });
             this.chart.chart.data.datasets[0].data = this.datatemp;
             this.chart.chart.data.labels = this.flagstemp;
@@ -66,12 +64,14 @@ export class GraphComponent implements OnInit {
         );
         break;
       default:
-        this.WeatherService.getCasosCiudades().subscribe(
+        this.WeatherService.getCasosDias().subscribe(
           (data) => {
             console.log(data);
             data.forEach((element) => {
               this.datatemp.push(element['casos']);
-              this.flagstemp.push(element['ciudad']);
+              this.flagstemp.push(
+                this.datePipe.transform(element['fecha'], 'yyyy-MM-dd')
+              );
             });
             this.chart.chart.data.datasets[0].data = this.datatemp;
             this.chart.chart.data.labels = this.flagstemp;
@@ -105,6 +105,9 @@ export class GraphComponent implements OnInit {
         console.error(error);
       }
     );
+
+    
+    setInterval(()=> { this.CambiarGraph(this.selected) }, this.timeInterlSeconds * 1000);
   }
 
   lineChartData: ChartDataSets[] = [
